@@ -40,6 +40,7 @@
                 <td>{{ $student->name }}</td>
                 <!-- Menampilkan nama dari data student -->
                 <td>{{ $student->jurusan->nama_jurusan}}</td>
+                <!-- Menampilkan nama jurusan dari data student -->
                 <td>{{ $student->birth_date }}</td>
                 <!-- Menampilkan tanggal lahir dari data student -->
                 <td>

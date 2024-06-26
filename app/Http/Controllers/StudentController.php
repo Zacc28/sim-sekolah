@@ -17,9 +17,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        // Mengambil semua data dari model 'Student' dan menyimpannya dalam array $data dengan key 'students'
-        //$data['students'] = Student::all();
-
+        // Mengambil semua data dari model 'Student' beserta relasinya dengan 'Jurusan' dan menyimpannya dalam array $data dengan key 'students'
         $data['students'] = Student::with('jurusan')->get();
 
         // Mengarahkan tampilan ke file "resources/views/student/index.blade.php" dan meneruskan data $data['students' ke tampilan tersebut
@@ -33,16 +31,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-
-        // $response = Http::withHeaders([
-        //     'Authorization' => 'rq7MMQZz4WU+23xnWnDy'
-        // ])->asForm()->post('https://api.fonnte.com/send', [
-        //     'target' => '6289512561626',
-        //     'message' => 'Pesanan shopee atas nama ',
-        // ]);
-
-        // return $response;
-
+        // Mengambil semua data dari model 'Jurusan' dan menyimpannya dalam array $data dengan key 'jurusan'
         $data['jurusan'] = Jurusan::all();
 
         // Mengarahkan tampilan ke file "resources/views/student/create.blade.php"
@@ -61,13 +50,14 @@ class StudentController extends Controller
         Log::debug($request);
         Log::info("ini proses insert data");
 
-
+        // Mengirim pesan melalui API dengan menggunakan header authorization dan data dari request
         $response = Http::withHeaders([
             'Authorization' => 'rq7MMQZz4WU+23xnWnDy'
         ])->asForm()->post('https://api.fonnte.com/send', [
             'target' => '6281287164881',
-            'message' => 'Halo ' . $request->name . ', saya dari SPX Express.
-            Saya sedang dalam perjalanan untuk mengirimkan paket Shopee: 240623QW1FE7B0, nomor resi SPXID 0123456789 ke lokasi Anda. Tolong pastikan alamat sudah benar, ada penerima di lokasi pengiriman, dan siapkan uang sejumlah 25.396 IDR untuk paket COD yang dipesan. Terima kasih!',
+            'message' => 'Halo ' . $request->name . ', saya dari SPX Express.\n\n' .
+                         'Saya sedang dalam perjalanan untuk mengirimkan paket Shopee: 240623QW1FE7B0, nomor resi SPXID 0123456789 ke lokasi Anda.\n' .
+                         'Tolong pastikan alamat sudah benar, ada penerima di lokasi pengiriman, dan siapkan uang sejumlah 25.396 IDR untuk paket COD yang dipesan. Terima kasih!',
         ]);
 
         // Membuat instance baru dari model 'Student'
@@ -76,8 +66,9 @@ class StudentController extends Controller
         $student->name = $request->name;
         // Mengisi properti 'nis' dengan data dari input 'nis' pada request
         $student->nis = $request->nis;
-        // Mengisi properti 'birth_date' dengan data dari input 'birth_date' pada request
+        // Mengisi properti 'jurusan_id' dengan data dari input 'jurusan_id' pada request
         $student->jurusan_id = $request->jurusan_id;
+        // Mengisi properti 'birth_date' dengan data dari input 'birth_date' pada request
         $student->birth_date = $request->birth_date;
         // Menyimpan data student baru ke dalam database
         $student->save();
@@ -114,7 +105,7 @@ class StudentController extends Controller
             return 'Data Tidak Ditemukan';
         } else {
             // Jika data ditemukan, simpan dalam array $data dengan key 'student' dan arahkan tampilan ke file "resources/views/student/edit.blade.php"
-            $data['student'] =  $student;
+            $data['student'] = $student;
             return view('student.edit', $data);
         }
     }

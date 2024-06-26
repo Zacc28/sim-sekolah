@@ -1,4 +1,5 @@
-# Auto detect text files and perform LF normalization
+# Konfigurasi untuk Git: Mendeteksi otomatis file teks dan normalisasi LF
 * text=auto
 
+# Direktori 'vendor' diabaikan untuk tidak diproses oleh Git
 vendor

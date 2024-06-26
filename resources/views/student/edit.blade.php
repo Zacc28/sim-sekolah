@@ -41,7 +41,21 @@
                         <!--
                             Input untuk Nama Siswa dengan nilai awal dari $student->name.
                         -->
-                        <input type="text" name="name" value="{{$student->name}}" placeholder="nama" class="form-control">
+                        <input type="text" name="name" value="{{$student->name}}" placeholder="Nama" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jurusan</td>
+                    <td>
+                        <!--
+                            Dropdown untuk memilih jurusan siswa dengan nilai awal dari $student->jurusan_id.
+                            Menampilkan semua jurusan yang ada.
+                        -->
+                        <select name="jurusan_id" class="form-control">
+                            @foreach ($jurusan as $j)
+                                <option value="{{ $j->id }}" {{ $student->jurusan_id == $j->id ? 'selected' : '' }}>{{ $j->nama_jurusan }}</option>
+                            @endforeach
+                        </select>
                     </td>
                 </tr>
                 <tr>

@@ -9,5 +9,6 @@ class Jurusan extends Model
 {
     use HasFactory;
 
-    protected $table="jurusan";
+    // Menentukan tabel yang digunakan oleh model 'Jurusan'
+    protected $table = "jurusan";
 }

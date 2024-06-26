@@ -20,13 +20,6 @@ Route::get('/', function () {
 // secara otomatis halaman dialihkan ke folder "resources/views/"
 // kemudian membuka file "welcome.blade.php"
 
-Route::get('contact', function () {
-    return view('contact_form');
-});
-// Pada kode di atas, jika domain "example.com/contact" diakses,
-// secara otomatis halaman dialihkan ke folder "resources/views/"
-// kemudian membuka file "contact_form.blade.php"
-
 //<--------------Start Student Section-------------->
 use App\Http\Controllers\StudentController;
 // Untuk setiap logika yang berkaitan dengan 'Student',

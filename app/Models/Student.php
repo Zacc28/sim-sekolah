@@ -14,9 +14,12 @@ class Student extends Model
     protected $fillable = ['nis', 'name', 'birth_date', 'jurusan_id'];
     // Properti $fillable digunakan untuk menentukan kolom mana saja
     // yang boleh diisi secara massal (mass assignable). Dalam hal ini,
-    // hanya kolom 'nis', 'name', dan 'birth_date' yang dapat diisi/ubah.
+    // hanya kolom 'nis', 'name', 'birth_date', dan 'jurusan_id' yang dapat diisi/ubah.
 
-    function jurusan(){
+    public function jurusan()
+    {
+        // Mendefinisikan relasi "belongsTo" antara model 'Student' dan 'Jurusan'.
+        // Setiap student terkait dengan satu jurusan.
         return $this->belongsTo(Jurusan::class);
     }
 }
