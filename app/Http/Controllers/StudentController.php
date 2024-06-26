@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Jurusan;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
@@ -32,6 +33,16 @@ class StudentController extends Controller
      */
     public function create()
     {
+
+        // $response = Http::withHeaders([
+        //     'Authorization' => 'rq7MMQZz4WU+23xnWnDy'
+        // ])->asForm()->post('https://api.fonnte.com/send', [
+        //     'target' => '6289512561626',
+        //     'message' => 'Pesanan shopee atas nama ',
+        // ]);
+
+        // return $response;
+
         $data['jurusan'] = Jurusan::all();
 
         // Mengarahkan tampilan ke file "resources/views/student/create.blade.php"
@@ -49,6 +60,15 @@ class StudentController extends Controller
         // Mencatat informasi request dan pesan log bahwa proses insert data sedang berlangsung
         Log::debug($request);
         Log::info("ini proses insert data");
+
+
+        $response = Http::withHeaders([
+            'Authorization' => 'rq7MMQZz4WU+23xnWnDy'
+        ])->asForm()->post('https://api.fonnte.com/send', [
+            'target' => '6281287164881',
+            'message' => 'Halo ' . $request->name . ', saya dari SPX Express.
+            Saya sedang dalam perjalanan untuk mengirimkan paket Shopee: 240623QW1FE7B0, nomor resi SPXID 0123456789 ke lokasi Anda. Tolong pastikan alamat sudah benar, ada penerima di lokasi pengiriman, dan siapkan uang sejumlah 25.396 IDR untuk paket COD yang dipesan. Terima kasih!',
+        ]);
 
         // Membuat instance baru dari model 'Student'
         $student = new Student();
