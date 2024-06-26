@@ -1,0 +1,45 @@
+#1 cd example-app : untuk pindah lokasi directory 
+
+#2 composer create-project laravel/laravel example-app : untuk membuat project baru beserta package laravel dengan composer 
+
+#3 php artisan serve : untuk menjalankan server
+
+#4 php artisan make:controller StudentController --resource : untuk membuat controller baru dengan nama StudentController beserta dengan kodenya.
+
+#5 composer require laravelcollective/html : ?
+
+#6  php artisan make:model Student -m: untuk membuat model data baru didalam database dengan nama model 'Student'. Aturannya, laravel akan membuat sebuah tabel dengan nama model yang dibuat namun dalam bentuk plural dan menjadi 'students'
+
+#7  php artisan migrate : memindahkan perintah yang ditulis didalam file baru yang ada di folder "database/migration", agar perintahnya dijalankan kedalam basis data
+
+#8 .env : digunakan untuk mengatur koneksi basis data MySql
+
+
+Step-by-step
+#Hari Ke 1
+1. Instalasi vs code, xampp, laravel, composer, bootstrap
+2. Instalasi extension blade di vs code
+3. Memindahkan directory melalui cmd dengan perintah "cd xampp/htdocs"
+4. Membuat project laravel baru beserta packagenya dengan perintah "composer create-project laravel/laravel nama-app"
+5. Memindahkan directory ke project yang baru dibuat dengan perintah "cd example-app"
+6. Menjalankan server dengan perintah "php artisan serve"
+7. Membuat file test.blade.php pada "resources/views" untuk melakukan pengetesan
+8. Mengubah kode pada "routes/web.php" agar test.blade.php bisa dijalankan
+9. Membuat folder 'student' pada "resources/views" beserta file index, create dan edit.blade.php
+10. Membuat Controller baru beserta resourcenya dengan perintah "php artisan make:controller StudentController --resource" supaya setiap logika yang berkaitan dengan student, dijalankan pada StudentController
+11. Melakukan perubahan pada "routes/web.php" agar Controller baru dapat digunakan
+12. Mengatur routing agar yang berkaiten dengan student, diarahkan ke StudentController
+13. Mengedit masing-masing file index, create dan edit dengan tampilan web sederhana dengan bootstrap
+14. Mengecek apakah routing sudah berjalan dengan benar
+
+#Hari Ke 2
+1. Membuat database baru
+2. Mengatur koneksi database dengan file '.env'
+3. Membuat tabel 'student' baru dengan perintah "php artisan make:model Student -m" 
+4. Mengedit file yang baru ditambahkan oleh sistem pada folder "database/migrations"
+5. Menambahkan kolom pada tabel sesuai kebutuhan
+6. Melakukan migration dengan perintah "php artisan migrate" agar kode yang ditambahkan pada "database/migrations" bisa dijalankan di database
+7. Melakukan insert data secara manual pada tabel student di database
+8. Menambahkan perintah "$data['students'] = Student::all();" pada StudentController pada function index untuk mengambil seluruh data dari database
+9. Menambahkan perintah "return view('student.index', $data);" agar data yang sudah diambil dari database bisa ditampilkan
+10. 
