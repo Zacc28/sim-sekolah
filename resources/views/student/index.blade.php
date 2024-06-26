@@ -23,6 +23,7 @@
                 <th>Nomor</th>
                 <th>NIS</th>
                 <th>Nama</th>
+                <th>Jurusan</th>
                 <th>Tanggal Lahir</th>
                 <th colspan="2" width="40">Action</th>
             </tr>
@@ -38,11 +39,12 @@
                 <!-- Menampilkan NIS dari data student -->
                 <td>{{ $student->name }}</td>
                 <!-- Menampilkan nama dari data student -->
+                <td>{{ $student->jurusan->nama_jurusan}}</td>
                 <td>{{ $student->birth_date }}</td>
                 <!-- Menampilkan tanggal lahir dari data student -->
                 <td>
                     <!-- Tombol untuk mengedit data student, mengarahkan ke halaman edit -->
-                    <a href="/student/{{ $student->id }}/edit" class="btn btn-primary">Edit</a>
+                    <a href="/student/{{ $student->id }}/edit" class="btn btn-warning">Edit</a>
                 </td>
                 <td>
                     <!-- Form untuk menghapus data student -->
