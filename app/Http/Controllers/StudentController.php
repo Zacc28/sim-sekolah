@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Jurusan;
 use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
@@ -16,8 +17,10 @@ class StudentController extends Controller
     public function index()
     {
         // Mengambil semua data dari model 'Student' dan menyimpannya dalam array $data dengan key 'students'
-        $data['students'] = Student::all();
-        
+        //$data['students'] = Student::all();
+
+        $data['students'] = Student::with('jurusan')->get();
+
         // Mengarahkan tampilan ke file "resources/views/student/index.blade.php" dan meneruskan data $data['students' ke tampilan tersebut
         return view('student.index', $data);
     }
@@ -29,8 +32,10 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $data['jurusan'] = Jurusan::all();
+
         // Mengarahkan tampilan ke file "resources/views/student/create.blade.php"
-        return view('student.create');
+        return view('student.create', $data);
     }
 
     /**
@@ -52,6 +57,7 @@ class StudentController extends Controller
         // Mengisi properti 'nis' dengan data dari input 'nis' pada request
         $student->nis = $request->nis;
         // Mengisi properti 'birth_date' dengan data dari input 'birth_date' pada request
+        $student->jurusan_id = $request->jurusan_id;
         $student->birth_date = $request->birth_date;
         // Menyimpan data student baru ke dalam database
         $student->save();
